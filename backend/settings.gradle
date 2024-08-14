@@ -1,0 +1,2 @@
+rootProject.name = 'backend'
+include 'authentication', 'transaction', 'account', 'card', 'address', 'user'

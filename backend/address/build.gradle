@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'org.jsonschema2pojo' version "$jsonschema2pojo"
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+}
+
+group = 'com.bank'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+}
+
+jsonSchema2Pojo {
+    source = files("${sourceSets.main.output.resourcesDir}/schemas")
+    targetDirectory = file("${projectDir}/src/main/java")
+//    targetDirectory = file("${project.buildDir}/generated-sources/js2p")
+    targetPackage = 'com.bank.address.dto'
+    generateBuilders = true
+    annotationStyle = 'jackson'
+    outputEncoding = 'UTF-8'
+//    formatDateTimes = true
+//    formatDates = true
+//    formatTimes = true
+    useLongIntegers = true
+    dateType = "java.time.LocalDate"
+    dateTimeType = "java.time.LocalDateTime"
+    timeType = "java.time.LocalTime"
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:r2dbc-postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

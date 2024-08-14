@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/roleDto",
+  "title": "Role",
+  "description": "A role is a set of permissions that a user has.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "ID of the role",
+      "type": "integer",
+      "minimum": 1,
+      "example": 1
+    },
+    "role": {
+      "description": "Name of the role",
+      "enum": [
+        "ROLE_ADMIN",
+        "ROLE_MANAGER",
+        "ROLE_USER"
+      ],
+      "example": "ROLE_ADMIN"
+    }
+  },
+  "required": [
+    "role"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,62 @@
+<nav aria-label="Eleventh navbar example" class="navbar navbar-expand-lg bg-body-tertiary rounded">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler collapsed"
+            data-bs-target="#navbarsExample09" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarsExample09" style="">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a aria-disabled="true" class="nav-link disabled">Disabled</a>
+        </li>
+        <li class="nav-item dropdown">
+          @if (storageService.getUser().roles != undefined) {
+            @if (storageService.getUser().roles.at(0).role == 'ROLE_USER') {
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" (click)="showMenu()">Cards</a>
+            } @else if (storageService.getUser().roles.at(0).role == 'ROLE_MANAGER') {
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" (click)="showMenu()">Users</a>
+            } @else if (storageService.getUser().roles.at(0).role == 'ROLE_ADMIN') {
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" (click)="showMenu()">Managers</a>
+            }
+          }
+          <ul [attr.class]=newClass>
+            @if (storageService.getUser().roles != undefined) {
+              @if (storageService.getUser().roles.at(0).role == 'ROLE_USER') {
+                <li><a class="dropdown-item" href="#">Create Card</a></li>
+                <li><a class="dropdown-item" href="#">Read Card</a></li>
+                <li><a class="dropdown-item" href="#">Update Card</a></li>
+                <li><a class="dropdown-item" href="#">Delete Card</a></li>
+              } @else if (storageService.getUser().roles.at(0).role == 'ROLE_MANAGER') {
+                <li><a class="dropdown-item" (click)="userService.typeCrud='create'; showMenu()">Create User</a></li>
+                <li><a class="dropdown-item"
+                       (click)="userService.typeCrud='read'; userService.get('ROLE_USER'); showMenu()">Read User</a>
+                </li>
+                <li><a class="dropdown-item" (click)="userService.typeCrud='update'; showMenu()">Update User</a></li>
+                <li><a class="dropdown-item" (click)="userService.typeCrud='delete'; showMenu()">Delete User</a></li>
+              } @else if (storageService.getUser().roles.at(0).role == 'ROLE_ADMIN') {
+                <li><a class="dropdown-item" (click)="userService.typeCrud='create'; showMenu()">Create Manager</a></li>
+                <li><a class="dropdown-item"
+                       (click)="userService.typeCrud='read'; userService.get('ROLE_MANAGER'); showMenu()">Read
+                  Manager</a></li>
+                <li><a class="dropdown-item" (click)="userService.typeCrud='update'; showMenu()">Update Manager</a></li>
+                <li><a class="dropdown-item" (click)="userService.typeCrud='delete'; showMenu()">Delete Manager</a></li>
+              }
+            }
+          </ul>
+        </li>
+      </ul>
+      <form role="search">
+        <input aria-label="Search" class="form-control" placeholder="Search" type="search">
+      </form>
+    </div>
+  </div>
+</nav>

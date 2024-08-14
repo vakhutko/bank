@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/addressDto",
+  "title": "AddressDto",
+  "description": "Address",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Id",
+      "type": "integer",
+      "minimum": 1,
+      "example": 1
+    },
+    "country": {
+      "type": "string",
+      "example": "US"
+    },
+    "state": {
+      "type": "string",
+      "example": "NY"
+    },
+    "city": {
+      "type": "string",
+      "example": "New York"
+    },
+    "street": {
+      "type": "string",
+      "example": "123 Main St"
+    },
+    "house": {
+      "type": "integer",
+      "minimum": 1,
+      "example": "123"
+    },
+    "apartment": {
+      "type": "integer",
+      "minimum": 1,
+      "example": "14"
+    },
+    "zip": {
+      "type": "integer",
+      "minimum": 1,
+      "example": "10001"
+    }
+  },
+  "required": [
+    "country",
+    "state",
+    "city",
+    "street",
+    "house",
+    "zip"
+  ],
+  "additionalProperties": false
+}

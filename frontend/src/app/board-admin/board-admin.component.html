@@ -1,0 +1,126 @@
+<div class="container">
+  @if (userService.typeCrud == 'create') {
+    <form name="form"
+          class="needs-validation"
+          novalidate=""
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm">
+      <div class="row g-3">
+        <!--        <div class="col-sm-6">-->
+        <!--          <label for="firstName" class="form-label">First name</label>-->
+        <!--          <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">-->
+        <!--          <div class="invalid-feedback">-->
+        <!--            Valid first name is required.-->
+        <!--          </div>-->
+        <!--        </div>-->
+
+        <!--        <div class="col-sm-6">-->
+        <!--          <label for="lastName" class="form-label">Last name</label>-->
+        <!--          <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">-->
+        <!--          <div class="invalid-feedback">-->
+        <!--            Valid last name is required.-->
+        <!--          </div>-->
+        <!--        </div>-->
+
+        <div class="col-12">
+          <label for="username" class="form-label">Username</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text">&#64;</span>
+            <input type="text" class="form-control" id="username" placeholder="Username" required=""
+                   [(ngModel)]="user.username" #username="ngModel" name="username"
+                   [ngClass]="{ 'is-invalid': f.submitted && username.errors }">
+            @if (username.errors && f.submitted) {
+              <div class="invalid-feedback">Username is required!</div>
+            }
+            <!--            <div class="invalid-feedback">-->
+            <!--              Your username is required.-->
+            <!--            </div>-->
+          </div>
+        </div>
+
+        <!--        <div class="col-12">-->
+        <!--          <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>-->
+        <!--          <input type="email" class="form-control" id="email" placeholder="you@example.com"-->
+        <!--                 [(ngModel)]="form.email" #email="ngModel" name="email" [ngClass]="{ 'is-invalid': f.submitted && email.errors }">-->
+        <!--          <div class="invalid-feedback">-->
+        <!--            Please enter a valid email address for shipping updates.-->
+        <!--          </div>-->
+        <!--        </div>-->
+
+        <div class="col-12">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" required=""
+                 [(ngModel)]="user.password" #password="ngModel" name="password"
+                 [ngClass]="{ 'is-invalid': f.submitted && password.errors }">
+          @if (password.errors && f.submitted) {
+            <div class="invalid-feedback">
+              @if (password.errors['required']) {
+                <div>Password is required</div>
+              }
+              @if (password.errors['minlength']) {
+                <div>Password must be at least 6 characters</div>
+              }
+            </div>
+          }
+          <div class="invalid-feedback">
+            Password is required.
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <button class="w-100 btn btn-primary btn-lg" type="submit">Create Manager</button>
+    </form>
+  } @else if (userService.typeCrud == 'read') {
+    <div class="table-responsive small">
+      <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">username</th>
+          <!--          <th scope="col">email</th>-->
+          <th scope="col">update</th>
+          <th scope="col">delete</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (user of userService.users; track user) {
+            <tr>
+              <td>{{ user.id }}</td>
+              @if (update == user.id) {
+                <td>
+                  <input type="text" id="usernameUpdate" class="form-control" [(ngModel)]="user.username">
+                </td>
+                <!--                <td>-->
+                  <!--                  <input type="text" id="emailUpdate" class="form-control" [(ngModel)]="user.email">-->
+                  <!--                </td>-->
+                <td>
+                  <button class="btn btn-sm btn-outline-primary"
+                          (click)="userService.update(user.id, user.username); update = 0">save
+                  </button>
+                </td>
+              } @else {
+                <td>{{ user.username }}</td>
+                <!--                <td>{{ user.email }}</td>-->
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" (click)="update = user.id">update</button>
+                </td>
+              }
+              <td>
+                <button class="btn btn-sm btn-danger" (click)="userService.delete(user.id)">delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <p>Read managers</p>
+  } @else if (userService.typeCrud == 'update') {
+    <p>Update managers</p>
+  } @else if (userService.typeCrud == 'delete') {
+    <p>Delete managers</p>
+  } @else {
+    <p>Hello admin!!!</p>
+  }
+</div>

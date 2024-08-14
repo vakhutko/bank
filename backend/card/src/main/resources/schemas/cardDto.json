@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/cardDto",
+  "title": "Card",
+  "description": "Card",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Id",
+      "type": "integer",
+      "minimum": 1,
+      "example": 1
+    },
+    "number": {
+      "description": "Number",
+      "type": "string",
+      "pattern": "^\\d{16}$",
+      "example": "1234567890123456"
+    },
+    "expirationDate": {
+      "description": "Expiration Date",
+      "type": "string",
+      "pattern": "^\\d{2}/\\d{2}$",
+      "example": "12/23"
+    },
+    "securityCode": {
+      "description": "Security Code",
+      "type": "string",
+      "pattern": "^\\d{3}$",
+      "example": "123"
+    },
+    "pin": {
+      "description": "Pin",
+      "type": "string",
+      "pattern": "^\\d{4}$",
+      "example": "1234"
+    },
+    "type": {
+      "description": "Type",
+      "type": "string",
+      "enum": [
+        "VISA",
+        "MASTERCARD",
+        "AMEX",
+        "DISCOVER",
+        "JCB",
+        "MAESTRO",
+        "MIR"
+      ],
+      "example": "VISA"
+    },
+    "status": {
+      "description": "Status",
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "blocked",
+        "expired"
+      ],
+      "example": "active"
+    },
+    "createdAt": {
+      "description": "Created At",
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-01-01T00:00:00.000Z"
+    },
+    "updatedAt": {
+      "description": "Updated At",
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-01-01T00:00:00.000Z"
+    },
+    "deletedAt": {
+      "description": "Deleted At",
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-01-01T00:00:00.000Z"
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": false
+}

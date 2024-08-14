@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/accountDto",
+  "title": "Account",
+  "description": "Account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Id",
+      "type": "integer",
+      "minimum": 1,
+      "example": 1
+    },
+    "type": {
+      "description": "Type",
+      "type": "string",
+      "enum": [
+        "debit",
+        "credit"
+      ],
+      "example": "checking"
+    },
+    "number": {
+      "description": "Number",
+      "type": "string",
+      "pattern": "^\\d{20}+$",
+      "example": "41111111111111111111"
+    },
+    "balance": {
+      "description": "Balance",
+      "type": "number",
+      "minimum": 0.0,
+      "multipleOf": 0.01,
+      "example": 108.56
+    },
+    "dateOpened": {
+      "description": "Date Opened",
+      "type": "string",
+      "format": "date",
+      "example": "2020-01-01"
+    },
+    "dateClosed": {
+      "description": "Date Closed",
+      "type": "string",
+      "format": "date",
+      "example": "2020-01-01"
+    },
+    "status": {
+      "description": "Status",
+      "type": "string",
+      "enum": [
+        "start",
+        "advance",
+        "premium"
+      ]
+    }
+  }
+}

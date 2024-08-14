@@ -1,0 +1,34 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: bank
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      routes:
+        - id: account
+          uri: http://localhost:8081
+          predicates:
+            - Path=/accounts/**
+          filters:
+            #            - StripPrefix=1
+            - AddRequestHeader=X-Request-Example, Gateway-Request
+            - AddResponseHeader=X-Response-Example, Gateway-Response
+        #            - AddResponseHeader=Access-Control-Allow-Credentials, true
+        #            - AddResponseHeader=Access-Control-Allow-Origin, http://localhost:8080
+        - id: authentication
+          uri: http://localhost:8082
+          predicates:
+            - Path=/authentication/**
+          filters:
+            - AddRequestHeader=X-Request-Example, Gateway-Request
+            - AddResponseHeader=X-Response-Example, Gateway-Response
+        - id: transaction
+          uri: http://localhost:8083
+          predicates:
+            - Path=/transactions/**
+          filters:
+            - AddRequestHeader=X-Request-Example, Gateway-Request
+            - AddResponseHeader=X-Response-Example, Gateway-Response

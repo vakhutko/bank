@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/user",
+  "title": "User",
+  "description": "A user schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "ID of the user",
+      "type": "integer",
+      "minimum": 1,
+      "example": 1
+    },
+    "username": {
+      "description": "Username of the user",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^\\w{1,256}$",
+      "example": "username"
+    },
+    "password": {
+      "description": "Password of the user",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "example": "password"
+    },
+    "enabled": {
+      "description": "Whether the user is enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "createdAt": {
+      "description": "Timestamp of when the user was created",
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-01-01T00:00:00Z"
+    },
+    "updatedAt": {
+      "description": "Timestamp of when the user was last updated",
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-01-01T00:00:00Z"
+    },
+    "roles": {
+      "description": "Roles of the user",
+      "type": "array",
+      "items": {
+        "$ref": "roleDto.json"
+      },
+      "example": [
+        "admin",
+        "user"
+      ]
+    }
+  },
+  "required": [
+    "username",
+    "password"
+  ],
+  "additionalProperties": false
+}

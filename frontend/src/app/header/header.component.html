@@ -1,0 +1,57 @@
+<header class="p-3 mb-3 border-bottom">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none" href="/">
+        <svg aria-label="Bootstrap" class="bi me-2" height="32" role="img" width="40">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a class="nav-link px-2 link-secondary" href="#">Overview</a></li>
+        <li><a class="nav-link px-2 link-body-emphasis" href="#">Inventory</a></li>
+        <li><a class="nav-link px-2 link-body-emphasis" href="#">Customers</a></li>
+        <li><a class="nav-link px-2 link-body-emphasis" href="#">Products</a></li>
+      </ul>
+
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <input aria-label="Search" class="form-control" placeholder="Search..." type="search">
+      </form>
+
+      @if (isAuthorize) {
+        <div class="dropdown text-end">
+          <a class='d-block link-body-emphasis text-decoration-none dropdown-toggle' data-bs-toggle="dropdown"
+             aria-expanded="false" (click)="showMenu()">
+            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul [attr.class]=newClass
+              style='position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.4px, 0px);'
+              data-popper-placement='bottom-start'>
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" (click)="logout(); showMenu()">Sign out</a></li>
+          </ul>
+        </div>
+      } @else {
+        <div class="dropdown text-end">
+          <a class='d-block link-body-emphasis text-decoration-none dropdown-toggle' data-bs-toggle="dropdown"
+             aria-expanded="false" (click)="showMenu()">
+            <svg class="bi me-2" width="32" height="32" role="img" aria-label="Bootstrap">
+              <use xlink:href="#people-circle"></use>
+            </svg>
+          </a>
+          <ul [attr.class]=newClass
+              style='position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.4px, 0px);'
+              data-popper-placement='bottom-start'>
+            <li><a class="dropdown-item" routerLink="login" href="/login" (click)="showMenu()">Login</a></li>
+            <li><a class="dropdown-item" routerLink="register" href="/register" (click)="showMenu()">Sign-up</a></li>
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</header>

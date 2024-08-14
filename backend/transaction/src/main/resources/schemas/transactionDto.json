@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/transactionDto",
+  "title": "Transaction",
+  "description": "Transaction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "ID of the transaction",
+      "type": "string",
+      "format": "uuid"
+    },
+    "payerAccount": {
+      "description": "Account ID of the payer",
+      "type": "string",
+      "pattern": "^\\d{20}$"
+    },
+    "payeeAccount": {
+      "description": "Account ID of the payee",
+      "type": "string",
+      "pattern": "^\\d{20}$"
+    },
+    "amount": {
+      "description": "Amount of the transaction",
+      "type": "number",
+      "minimumExclusive": 0,
+      "multipleOf": 0.01,
+      "example": 108.56
+    },
+    "currency": {
+      "description": "Currency of the transaction",
+      "type": "string",
+      "enum": [
+        "USD",
+        "EUR",
+        "GBP",
+        "JPY",
+        "CNY",
+        "RUB"
+      ]
+    },
+    "createdAt": {
+      "description": "Timestamp of the transaction",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "payerAccount",
+    "payeeAccount",
+    "amount",
+    "currency"
+  ],
+  "additionalProperties": false
+}

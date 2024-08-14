@@ -1,0 +1,37 @@
+openapi: 3.0.3
+info:
+  title: Title
+  description: Title
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /users/{userId}: {
+    get: {
+      responses: {
+        200: { description: 'OK' }
+      }
+    },
+    post: {
+      requestBody: {
+        content: {
+          application/json: {
+            schema: {
+              type: 'object',
+              properties: {
+                name: {
+                        type:'string'
+                },
+                age: {
+                       type:'integer'
+                }
+              }
+            }
+          }
+        }
+      },
+      responses: {
+        200: { description: 'OK' }
+      }
+    }
+  }

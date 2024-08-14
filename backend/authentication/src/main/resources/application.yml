@@ -1,0 +1,27 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: authentication
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  flyway:
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: postgres
+jwt:
+  password:
+    encoder:
+      secret: QkFOSyBBUFBMSUNBVElPTg==
+      iteration: 64
+      keylength: 256
+  secret: ====================my-very-secret-jwt=========================
+  expiration: 3600
+  issuer: proselyte
+#logging:
+#  level:
+#    root: debug
+#    sql: debug
+#    org.springframework.data.r2dbc: debug
